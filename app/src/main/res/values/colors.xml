@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dark_purple">#28112B</color>
+    <color name="eggplant">#453643</color>
+    <color name="davys_gray">#5E5D5C</color>
+    <color name="reseda_green">#788475</color>
+    <color name="cambridge_blue">#8DAA91</color>
+</resources>
