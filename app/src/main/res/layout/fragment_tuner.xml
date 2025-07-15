@@ -17,27 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/tv_ampl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="440hz"
-        android:textSize="24sp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_frequency" />
-
-    <TextView
-        android:id="@+id/tv_db"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="440hz"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ampl" />
 
     <TextView
         android:id="@+id/tv_note"
@@ -48,6 +27,6 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_db" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_frequency" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

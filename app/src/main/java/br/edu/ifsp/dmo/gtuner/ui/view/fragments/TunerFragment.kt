@@ -54,16 +54,6 @@ class TunerFragment : Fragment() {
     }
 
     fun setupObservers() {
-        viewModel.amp.observe(viewLifecycleOwner) { amp ->
-            amp?.let {
-                binding.tvFrequency.text = it
-            }
-        }
-        viewModel.db.observe(viewLifecycleOwner) { db ->
-            db?.let {
-                binding.tvFrequency.text = it
-            }
-        }
         viewModel.hz.observe(viewLifecycleOwner) { hz ->
             hz?.let {
                 binding.tvFrequency.text = it

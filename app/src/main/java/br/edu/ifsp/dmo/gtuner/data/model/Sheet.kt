@@ -29,4 +29,8 @@ class Sheet (
             return "C" + UUID.randomUUID().toString().replace("-", "").take(10)
         }
     }
+
+    override fun toString(): String {
+        return id + " " + name + " " + url + " " + author + " " + arrangment
+    }
 }

@@ -1,28 +1,46 @@
 package br.edu.ifsp.dmo.gtuner.ui.view.fragments
 
+import android.Manifest
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import java.io.File
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.ifsp.dmo.gtuner.data.model.Sheet
+import br.edu.ifsp.dmo.gtuner.databinding.FragmentSheetBinding
+import br.edu.ifsp.dmo.gtuner.ui.activities.MainActivity
 import br.edu.ifsp.dmo.gtuner.ui.adapter.SheetAdapter
 import br.edu.ifsp.dmo.gtuner.ui.listener.SheetItemListener
+import br.edu.ifsp.dmo.gtuner.ui.util.CameraHelper
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.SheetsViewModel
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.SheetsViewModelFactory
-import br.edu.ifsp.dmo.gtuner.databinding.FragmentSheetBinding
+import java.io.FileOutputStream
+import java.io.OutputStream
 
-class SheetFragment : Fragment(), SheetItemListener {
+
+class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemListener {
     private var _binding: FragmentSheetBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: SheetsViewModel
     private lateinit var sheetAdapter: SheetAdapter
 
+    private val REQUEST_WRITE_EXTERNAL_STORAGE_CODE = 1002
     private val PICK_PDF_REQUEST_CODE = 954
     private var sheet_uri: Uri? = null
 
@@ -74,19 +92,29 @@ class SheetFragment : Fragment(), SheetItemListener {
             startActivityForResult(intent, PICK_PDF_REQUEST_CODE)
         }
 
+        binding.btnTakePhoto.setOnClickListener {
+            activity.takePhoto()
+        }
+
         binding.btnCreateSheet.setOnClickListener {
 
             val name = binding.etSheetName.text.toString()
             val author = binding.etSheetAuthor.text.toString()
             val arrangment = binding.etSheetArrangment.text.toString()
 
+            activity.saveToStorage(name, author, arrangment)
+
             viewModel.addSheet(name, author, arrangment, sheet_uri)
+
+            binding.sheetListLayout.visibility = View.VISIBLE
+            binding.sheetAddLayout.visibility = View.GONE
         }
     }
 
     fun setupObservers() {
         viewModel.sheets.observe(viewLifecycleOwner) { sheets ->
             sheets?.let {
+                System.out.println(it)
                 sheetAdapter.submitDataset(it)
             }
         }

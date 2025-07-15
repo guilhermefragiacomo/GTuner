@@ -20,7 +20,10 @@ class SheetAdapter(private val listener: SheetItemListener) :
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val sheet = dataset[position]
+        val sheet = getDatasetItem(position)
+
+        System.out.println(dataset)
+        System.out.println(sheet)
 
         holder.binding.tvName.text = sheet.name
         holder.binding.tvAuthor.text = sheet.author
@@ -35,6 +38,7 @@ class SheetAdapter(private val listener: SheetItemListener) :
     }
     fun submitDataset(data: List<Sheet>) {
         dataset = data
+        System.out.println(dataset)
         this.notifyDataSetChanged()
     }
     fun getDatasetItem(position: Int): Sheet {

@@ -8,6 +8,7 @@ public class AudioCalculator {
     private int[] amplitudes;
     private double[] decibels;
     private double frequency;
+    private double last_frequency = 0.0D;
     private int amplitude;
     private double decibel;
 
@@ -71,7 +72,24 @@ public class AudioCalculator {
     }
 
     public double getFrequency() {
-        if (frequency == 0.0D) frequency = retrieveFrequency();
+        if (frequency == 0.0D) {
+            double retrievedFrequency = retrieveFrequency();
+            if (last_frequency != 0.0D) {
+                if (retrievedFrequency < last_frequency - 2) {
+                    frequency = retrievedFrequency;
+                    last_frequency = frequency;
+                    return frequency;
+                }
+                if (retrievedFrequency > last_frequency + 2) {
+                    frequency = retrievedFrequency;
+                    last_frequency = frequency;
+                    return frequency;
+                }
+                return last_frequency;
+            }
+            frequency = retrievedFrequency;
+            last_frequency = frequency;
+        }
         return frequency;
     }
 
