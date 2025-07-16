@@ -11,17 +11,21 @@ public class AudioCalculator {
     private double last_frequency = 0.0D;
     private int amplitude;
     private double decibel;
+    private float sensibility;
 
-    public AudioCalculator() {
+    public AudioCalculator(float sensibility) {
+        this.sensibility = sensibility;
     }
 
-    public AudioCalculator(byte[] bytes) {
+    public AudioCalculator(byte[] bytes, float sensibility) {
         this.bytes = bytes;
         amplitudes = null;
         decibels = null;
         frequency = 0.0D;
         amplitude = 0;
         decibel = 0.0D;
+
+        this.sensibility = sensibility;
     }
 
     public void setBytes(byte[] bytes) {
@@ -75,12 +79,12 @@ public class AudioCalculator {
         if (frequency == 0.0D) {
             double retrievedFrequency = retrieveFrequency();
             if (last_frequency != 0.0D) {
-                if (retrievedFrequency < last_frequency - 2) {
+                if (retrievedFrequency < last_frequency - sensibility) {
                     frequency = retrievedFrequency;
                     last_frequency = frequency;
                     return frequency;
                 }
-                if (retrievedFrequency > last_frequency + 2) {
+                if (retrievedFrequency > last_frequency + sensibility) {
                     frequency = retrievedFrequency;
                     last_frequency = frequency;
                     return frequency;

@@ -12,7 +12,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 ) {
     object DATABASE_KEYS {
         const val DATABASE_NAME = "gtuner.db"
-        const val DATABASE_VERSION = 2
+        const val DATABASE_VERSION = 5
 
         const val TABLE_SHEET_NAME = "sheet"
         const val COLUMN_SHEET_NAME = "name"
@@ -20,6 +20,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         const val COLUMN_SHEET_URL = "url"
         const val COLUMN_SHEET_AUTHOR = "author"
         const val COLUMN_SHEET_ARRANGMENT = "arrangment"
+        const val COLUMN_SHEET_BITMAP = "bitmap"
     }
 
     private companion object {
@@ -28,7 +29,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 "${DATABASE_KEYS.COLUMN_SHEET_NAME} TEXT NOT NULL, " +
                 "${DATABASE_KEYS.COLUMN_SHEET_URL} TEXT NOT NULL," +
                 "${DATABASE_KEYS.COLUMN_SHEET_AUTHOR} TEXT NOT NULL," +
-                "${DATABASE_KEYS.COLUMN_SHEET_ARRANGMENT} TEXT NOT NULL)"
+                "${DATABASE_KEYS.COLUMN_SHEET_ARRANGMENT} TEXT NOT NULL," +
+                "${DATABASE_KEYS.COLUMN_SHEET_BITMAP} TEXT NOT NULL)"
 
 
         const val SEARCH_SHEET_ID = "SELECT * " +

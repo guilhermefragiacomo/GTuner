@@ -44,6 +44,8 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
     private val PICK_PDF_REQUEST_CODE = 954
     private var sheet_uri: Uri? = null
 
+    private var photo_taken = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -93,6 +95,7 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
         }
 
         binding.btnTakePhoto.setOnClickListener {
+            photo_taken = true
             activity.takePhoto()
         }
 
@@ -102,8 +105,10 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
             val author = binding.etSheetAuthor.text.toString()
             val arrangment = binding.etSheetArrangment.text.toString()
 
-            activity.saveToStorage(name, author, arrangment)
-
+            if (photo_taken) {
+                activity.savePhotoSheet(name, author, arrangment)
+                photo_taken = false
+            }
             viewModel.addSheet(name, author, arrangment, sheet_uri)
 
             binding.sheetListLayout.visibility = View.VISIBLE

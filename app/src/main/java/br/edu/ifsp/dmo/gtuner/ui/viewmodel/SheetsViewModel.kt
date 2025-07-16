@@ -1,14 +1,8 @@
 package br.edu.ifsp.dmo.gtuner.ui.viewmodel
 
-import android.Manifest
 import android.app.Application
-import android.content.Context
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -54,30 +48,13 @@ class SheetsViewModel(application : Application) : AndroidViewModel(application)
                     name = name,
                     author = author,
                     arrangment = arrangment,
-                    url = uri.toString()
+                    url = uri.toString(),
+                    bitmap = null
                 )
 
                 if (sheet_repository.add(sheet) > 0) {
-                    _saved.value = true/*
-                    Toast.makeText(
-                        getApplication<Application>(), getApplication<Application>().getString(
-                            R.string.loaded_sheet
-                        ), Toast.LENGTH_SHORT
-                    ).show()*/
-                } else {/*
-                    Toast.makeText(
-                        getApplication<Application>(),
-                        getApplication<Application>().getString(R.string.error_uploading_sheet),
-                        Toast.LENGTH_SHORT
-                    ).show()*/
+                    _saved.value = true
                 }
-            }
-            else {/*
-                Toast.makeText(
-                    getApplication<Application>(),
-                    getApplication<Application>().getString(R.string.error_uploading_sheet),
-                    Toast.LENGTH_SHORT
-                ).show()*/
             }
         }
     }

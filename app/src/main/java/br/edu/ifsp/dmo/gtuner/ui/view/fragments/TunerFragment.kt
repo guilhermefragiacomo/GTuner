@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import br.edu.ifsp.dmo.gtuner.audio.calculators.AudioCalculator
 import br.edu.ifsp.dmo.gtuner.audio.core.Recorder
 import br.edu.ifsp.dmo.gtuner.databinding.FragmentTunerBinding
+import br.edu.ifsp.dmo.gtuner.ui.util.PreferencesHelper
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.TunerViewModel
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.TunerViewModelFactory
 
@@ -34,7 +35,8 @@ class TunerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = TunerViewModelFactory(requireActivity().application)
+        val preferencesHelper = PreferencesHelper(requireContext())
+        val factory = TunerViewModelFactory(requireActivity().application, preferencesHelper)
         viewModel = ViewModelProvider(this, factory).get(TunerViewModel::class.java)
 
         viewModel.onResume()

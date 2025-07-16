@@ -140,7 +140,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etFrequencySensibility"/>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/material_switch"
+        android:id="@+id/switchNoteDisplay"
         android:layout_width="70dp"
         android:layout_margin="20dp"
         android:layout_height="wrap_content"
@@ -150,5 +150,15 @@
         android:text="C"
         app:layout_constraintEnd_toStartOf="@+id/tvNoteDisplayC"
         app:layout_constraintTop_toBottomOf="@+id/etFrequencySensibility" />
+
+    <Button
+        android:id="@+id/btnSaveSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_settings"
+        android:backgroundTint="@color/reseda_green"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

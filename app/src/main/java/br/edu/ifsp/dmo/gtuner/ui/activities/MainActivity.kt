@@ -5,18 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import android.Manifest
-import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import br.edu.ifsp.dmo.gtuner.R
+import br.edu.ifsp.dmo.gtuner.data.model.Sheet
 import br.edu.ifsp.dmo.gtuner.ui.view.fragments.SheetFragment
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.MainViewModel
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.MainViewModelFactory
@@ -24,9 +19,6 @@ import br.edu.ifsp.dmo.gtuner.databinding.ActivityMainBinding
 import br.edu.ifsp.dmo.gtuner.ui.util.CameraHelper
 import br.edu.ifsp.dmo.gtuner.ui.view.fragments.SettingsFragment
 import br.edu.ifsp.dmo.gtuner.ui.view.fragments.TunerFragment
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
 
 class MainActivity : AppCompatActivity(), CameraHelper.Callback {
     private lateinit var binding: ActivityMainBinding
@@ -113,47 +105,12 @@ class MainActivity : AppCompatActivity(), CameraHelper.Callback {
         }
     }
 
-    override fun onFotoRecebida(bitmap: Bitmap) {
-        originalBitmap = bitmap
+    fun savePhotoSheet(name: String, author: String, arrangment: String) {
+        viewModel.addSheet(name, author, arrangment, originalBitmap)
     }
 
-    fun saveToStorage(name: String, author: String, arrangment: String) {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            val imageName = name + "_" + author + "_" + arrangment + "_" + System.currentTimeMillis() + ".jpg"
-
-            var fos : OutputStream? = null
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                this.contentResolver?.also { resolver ->
-                    val contentValues = ContentValues().apply {
-                        put(MediaStore.MediaColumns.DISPLAY_NAME, imageName)
-                        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
-                    }
-                    val imageUri : Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-                    fos = imageUri?.let {
-                        resolver.openOutputStream(it)
-                    }
-                }
-            }
-            else {
-                val imagesDictionary = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                val image = File(imagesDictionary, imageName)
-                fos = FileOutputStream(image)
-            }
-            fos?.use {
-                originalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-                Toast.makeText(this, "Successfully saved the photo", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                REQUEST_WRITE_EXTERNAL_STORAGE_CODE
-            )
-        }
+    override fun onFotoRecebida(bitmap: Bitmap) {
+        originalBitmap = bitmap
     }
 
     fun takePhoto() {

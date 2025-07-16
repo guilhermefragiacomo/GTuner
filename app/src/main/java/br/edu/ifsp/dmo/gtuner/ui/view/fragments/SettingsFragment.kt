@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.edu.ifsp.dmo.gtuner.databinding.FragmentSettingsBinding
+import br.edu.ifsp.dmo.gtuner.ui.util.PreferencesHelper
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.SettingsViewModel
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.SettingsViewModelFactory
 
@@ -14,6 +15,7 @@ class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: SettingsViewModel
+    private lateinit var preferencesHelper: PreferencesHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,14 @@ class SettingsFragment : Fragment() {
         val factory = SettingsViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this, factory).get(SettingsViewModel::class.java)
 
+        preferencesHelper = PreferencesHelper(requireContext())
+
+        binding.etFrequency.setText(preferencesHelper.getA4Frequency().toString())
+        binding.etFrequencySensibility.setText(preferencesHelper.getFrequencySensibility().toString())
+        binding.switchNoteDisplay.isChecked = preferencesHelper.getNoteDisplay()
+
+        System.out.println(binding.etFrequency.text.toString())
+
         setupObservers()
         setupListeners()
     }
@@ -39,7 +49,15 @@ class SettingsFragment : Fragment() {
     }
 
     fun setupListeners() {
+        binding.btnSaveSettings.setOnClickListener {
+            var frequency = binding.etFrequency.text.toString()
+            var frequency_sensibility = binding.etFrequencySensibility.text.toString()
+            var note_display = binding.switchNoteDisplay.isChecked
 
+            preferencesHelper.saveA4Frequency(frequency.toInt())
+            preferencesHelper.saveFrequencySensibility(frequency_sensibility.toFloat())
+            preferencesHelper.saveNoteDisplay(note_display)
+        }
     }
 
     fun setupObservers() {

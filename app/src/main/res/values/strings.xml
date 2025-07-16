@@ -14,4 +14,5 @@
     <string name="sheet_name">sheet_name</string>
     <string name="load_sheet">load Sheet</string>
     <string name="sheets">Sheets</string>
+    <string name="save_settings">save settings</string>
 </resources>
