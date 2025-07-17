@@ -54,6 +54,8 @@ class SheetsViewModel(application : Application) : AndroidViewModel(application)
 
                 if (sheet_repository.add(sheet) > 0) {
                     _saved.value = true
+
+                    checkDatabase()
                 }
             }
         }

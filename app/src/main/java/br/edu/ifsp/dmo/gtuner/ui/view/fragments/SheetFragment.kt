@@ -1,24 +1,13 @@
 package br.edu.ifsp.dmo.gtuner.ui.view.fragments
 
-import android.Manifest
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import java.io.File
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,11 +16,8 @@ import br.edu.ifsp.dmo.gtuner.databinding.FragmentSheetBinding
 import br.edu.ifsp.dmo.gtuner.ui.activities.MainActivity
 import br.edu.ifsp.dmo.gtuner.ui.adapter.SheetAdapter
 import br.edu.ifsp.dmo.gtuner.ui.listener.SheetItemListener
-import br.edu.ifsp.dmo.gtuner.ui.util.CameraHelper
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.SheetsViewModel
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.SheetsViewModelFactory
-import java.io.FileOutputStream
-import java.io.OutputStream
 
 
 class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemListener {
@@ -43,6 +29,7 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
     private val REQUEST_WRITE_EXTERNAL_STORAGE_CODE = 1002
     private val PICK_PDF_REQUEST_CODE = 954
     private var sheet_uri: Uri? = null
+    private val PICK_PDF_FILE = 2
 
     private var photo_taken = false
 
@@ -84,6 +71,11 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
         binding.btnBackFromAdd.setOnClickListener {
             binding.sheetListLayout.visibility = View.VISIBLE
             binding.sheetAddLayout.visibility = View.GONE
+        }
+
+        binding.btnBackFromImage.setOnClickListener {
+            binding.imageLayout.visibility = View.GONE
+            binding.sheetListLayout.alpha = 1.0F
         }
 
         binding.btnUploadSheet.setOnClickListener {
@@ -134,6 +126,16 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
     }
 
     override fun onSheetClick(sheet: Sheet) {
-        TODO("Not yet implemented")
+        if (sheet.url != null) {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(sheet.url.toUri(), "application/pdf")
+            startActivity(intent)
+        } else {
+            if (sheet.bitmap != null) {
+                binding.ivSheetBitmap.setImageBitmap(sheet.bitmap)
+                binding.imageLayout.visibility = View.VISIBLE
+                binding.sheetListLayout.alpha = 0.5F
+            }
+        }
     }
 }

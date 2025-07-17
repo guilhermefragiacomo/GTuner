@@ -11,7 +11,7 @@
         android:id="@+id/tv_frequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="440hz"
+        android:text=""
         android:textSize="24sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,11 +22,41 @@
         android:id="@+id/tv_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mi"
+        android:text=""
         android:textSize="64sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_frequency" />
+
+    <TextView
+        android:id="@+id/tvCents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="-9"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_note" />
+
+    <ImageView
+        android:id="@+id/ivTunerImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/afinador"
+        app:layout_constraintTop_toBottomOf="@+id/tvCents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/ivBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/afinador_barra"
+        app:layout_constraintTop_toBottomOf="@+id/tvCents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

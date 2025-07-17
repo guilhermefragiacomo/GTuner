@@ -43,6 +43,9 @@ class TunerViewModel(application : Application, preferencesHelper: PreferencesHe
     private val _note = MutableLiveData<String>()
     val note : LiveData<String> = _note
 
+    private val _cents = MutableLiveData<Float>()
+    val cents : LiveData<Float> = _cents
+
     private val callback: Callback = object : Callback {
         override fun onBufferAvailable(buffer: ByteArray?) {
             audioCalculator!!.setBytes(buffer)
@@ -69,8 +72,8 @@ class TunerViewModel(application : Application, preferencesHelper: PreferencesHe
                 val closestFreq = a4frequency * 2.0.pow((noteNumber - 69) / 12.0)
                 val centsOff = 1200 * log2(frequency / closestFreq)
                 if (noteIndex > 0 && noteIndex < actualNoteNames.size) {
-                    _note.value =
-                        "${actualNoteNames[noteIndex]}$octave (${String.format("%.2f", centsOff)} cents)"
+                    _note.value = "${actualNoteNames[noteIndex]}$octave"
+                    _cents.value = centsOff.toFloat()
                 }
             }
         }

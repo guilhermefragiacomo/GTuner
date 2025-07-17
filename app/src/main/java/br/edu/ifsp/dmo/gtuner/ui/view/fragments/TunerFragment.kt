@@ -1,18 +1,16 @@
 package br.edu.ifsp.dmo.gtuner.ui.view.fragments
 
-import android.R
-import android.content.pm.ActivityInfo
-import android.os.Handler;
-import android.os.Looper;
+import android.R.attr.angle
+import android.R.attr.pivotX
+import android.R.attr.pivotY
+import android.graphics.Matrix
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import br.edu.ifsp.dmo.gtuner.audio.calculators.AudioCalculator
-import br.edu.ifsp.dmo.gtuner.audio.core.Recorder
 import br.edu.ifsp.dmo.gtuner.databinding.FragmentTunerBinding
 import br.edu.ifsp.dmo.gtuner.ui.util.PreferencesHelper
 import br.edu.ifsp.dmo.gtuner.ui.viewmodel.TunerViewModel
@@ -64,6 +62,13 @@ class TunerFragment : Fragment() {
         viewModel.note.observe(viewLifecycleOwner) { note ->
             note?.let {
                 binding.tvNote.text = it
+            }
+        }
+        viewModel.cents.observe(viewLifecycleOwner) { cents ->
+            cents?.let {
+                binding.tvCents.text = it.toString()
+                binding.ivBar.rotation = cents;
+                binding.ivBar.pivotY = binding.ivBar.height.toFloat()
             }
         }
     }

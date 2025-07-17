@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), CameraHelper.Callback {
     private lateinit var viewModel: MainViewModel
     private val PERMISSOES_REQUERIDAS = arrayOf(
         Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.CAMERA
     )
