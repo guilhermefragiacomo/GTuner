@@ -105,6 +105,10 @@ class SheetFragment(private val activity: MainActivity) : Fragment(), SheetItemL
 
             binding.sheetListLayout.visibility = View.VISIBLE
             binding.sheetAddLayout.visibility = View.GONE
+            sheet_uri = null
+            binding.etSheetName.setText("")
+            binding.etSheetAuthor.setText("")
+            binding.etSheetArrangment.setText("")
         }
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GTuner</string>
+    <string name="tuning">Afinador</string>
+    <string name="frequency">Frequência</string>
+    <string name="a4_frequency">Frequência A4</string>
+    <string name="frequency_sensibility">Sensibilidade da frequência</string>
+    <string name="a4_base_frequency">440</string>
+    <string name="base_frequency_sensibility">2</string>
+    <string name="note_display">Aparência das notas</string>
+    <string name="back">Voltar</string>
+    <string name="create">Criar</string>
+    <string name="sheet_arrangment">Arranjo</string>
+    <string name="sheet_author">Autor</string>
+    <string name="sheet_name">Nome</string>
+    <string name="load_sheet">Carregar</string>
+    <string name="sheets">Partituras</string>
+    <string name="save_settings">Salvar configurações</string>
+</resources>

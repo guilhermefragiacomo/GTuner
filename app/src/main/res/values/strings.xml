@@ -7,12 +7,12 @@
     <string name="a4_base_frequency">440</string>
     <string name="base_frequency_sensibility">2</string>
     <string name="note_display">Note Display</string>
-    <string name="back">back</string>
-    <string name="create">create</string>
-    <string name="sheet_arrangment">sheet_arrangment</string>
-    <string name="sheet_author">sheet_author</string>
-    <string name="sheet_name">sheet_name</string>
-    <string name="load_sheet">load Sheet</string>
+    <string name="back">Back</string>
+    <string name="create">Create</string>
+    <string name="sheet_arrangment">Arrangment</string>
+    <string name="sheet_author">Author</string>
+    <string name="sheet_name">Name</string>
+    <string name="load_sheet">Load Sheet</string>
     <string name="sheets">Sheets</string>
-    <string name="save_settings">save settings</string>
+    <string name="save_settings">Save settings</string>
 </resources>
