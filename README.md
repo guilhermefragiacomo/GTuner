@@ -8,4 +8,4 @@
 - além disso, é possível configurar o afinador com atributos como: frequência base da afinação, sensibilidade de detecção do afinador e display das notas no aplicativo
 
 ## Vídeo de Apresentação
-https://youtu.be/N93eS9OSq64
+https://youtu.be/hQCBiAC_nCs
